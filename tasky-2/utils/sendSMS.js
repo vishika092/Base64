@@ -9,7 +9,7 @@ let {TWILIO_SID : sid,
 
 
 // This creates a new Twilio client instance, allowing you to interact with the Twilio API using your account credentials.
-let client = twilio(sid, auth);
+// let client = twilio(sid, auth);
 
 async function sendSMS({msgBody, toPhoneNum}){
     try{

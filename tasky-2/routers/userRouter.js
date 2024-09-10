@@ -7,7 +7,7 @@ import { userLoginController, userRegisterController } from "../controllers/user
 import { signUpValidator, logInValidator, validationErrorHandler } from "../middlewares/validations/validators.js"
 import authMiddleware from "../middlewares/auth/userAuth.js"
 
-let obj = {title : null, error : null, success : null, validationErr : null, token : null}
+let obj = {title : null, error : null, success : null, validationErr : null}
 
 userRouter.get("/register", (req, res, next) => {
     res.render("register", {...obj, title : "User Registration Page"})
@@ -23,7 +23,7 @@ userRouter.get("/redirect", (req, res , next) => {
 })
 
 userRouter.get("/auth", (req, res, next) => {
-    res.render("dashboard", obj )
+    res.render("auth", obj )
 })
 
 userRouter.post("/auth", async (req, res, next) => {

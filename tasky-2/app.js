@@ -22,6 +22,7 @@ app.use(express.json());
 // listen to url data  frpm form  (parse the url encoded data from views) 
 app.use(express.urlencoded({ extended: true }))
 
+
 app.use(express.static("public"))    // serve public folder under /
 app.use("/user", userRouter)
 app.use("/task", taskRouter)

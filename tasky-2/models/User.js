@@ -17,16 +17,6 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true
-    },
-    isVerified: {
-        email : {
-            type: Boolean,
-        default: false 
-        }
-    }
-    ,
-    token: {
-        type: String // Stores the verification token
     }
 })
 

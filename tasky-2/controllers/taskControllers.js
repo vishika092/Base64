@@ -54,15 +54,17 @@ async function addTaskController(req, res){
         }
 
         let {body} = req;
-        let {id, phone, email} = req.user
+        // let {phone, email} = req.user
+        console.log(req.user);
+        
         body.reminders = getReminders(body.deadline);
         body.deadline = new Date(body.deadline)
         body.user = id
 
         let task = new TaskModel(body)
         await task.save()
-        scheduleNotifications({reminders : body.reminders, toPhoneNum: phone, task : body.task, deadline : body.deadline, taskid : task._id, email });
-        res.send("Task Added Successfully !")
+        // scheduleNotifications({reminders : body.reminders, toPhoneNum: phone, task : body.task, deadline : body.deadline, taskid : task._id, email });
+        return res.render("addTask", {...obj, success : "Task Added Successfully !"}) 
 
       } catch (err) {
         console.log(err);

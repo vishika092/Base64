@@ -17,11 +17,11 @@
         <% } %>
 
         <form id="registrationForm" action="/user/register" method="POST">
-            <label for="fname">First Name:</label>
-            <% if(validationErr && validationErr.fname) { %>
-                <p class="validationErr"><%= validationErr.fname %></p>
+            <label for="name">First Name:</label>
+            <% if(validationErr && validationErr.name) { %>
+                <p class="validationErr"><%= validationErr.name %></p>
             <% } %>
-            <input type="text" id="fname" name="fname" required>
+            <input type="text" id="name" name="name" required>
 
             <label for="email">Email:</label>
             <% if(validationErr && validationErr.email) { %>

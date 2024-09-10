@@ -24,36 +24,50 @@
                 <% if(validationErr && validationErr.task) { %>
                     <p class="validationErr"><%= validationErr.task %></p>
                 <% } %>
-                <input type="text" id="taskName" name="task" required>
+                <input type="text" id="taskName" name="task" >
          
                 <label for="deadline">Deadline:</label>
                 <% if(validationErr && validationErr.deadline) { %>
                     <p class="validationErr"><%= validationErr.deadline %></p>
                 <% } %>
-                <input type="date" id="deadline" name="deadline" required>
+                <input type="date" id="deadline" name="deadline" >           
+            <input class="btn" type="submit" value="Add Task"><br>
+            <button class="btn" onclick="logOut()"> Logout </button>
            
-            <button type="submit">Add Task</button>
-        </form>
+
+        </form><br>
 
     </div>
 </body>
 <script>
-     const token = localStorage.getItem("auth-token")
+    function logOut(){
+            localStorage.removeItem("auth-token")
+            return window.location.href = "/user/login"
+        }
+
+async function main(){
+    try{
+        const token = localStorage.getItem("auth-token")
+    
     if(!token){
-        window.location.href = "/user/login"
+        return window.location.href = "/user/login"
     }
     // Sending headers with axios post request 
-    axios.post("/user/auth", {} , {
+    await axios.post("/user/auth", {} , {
             headers: {
                         'x-auth-key': token, // Custom header 
                         'Content-Type': 'application/json'    // Specifies the content type of the request body
                     }
-         },)
-         .catch((err) => {
-            console.log(err);
-            localStorage.removeItem("auth-token")
-            window.location.href = "/user/login"
-            
          })
+    }
+    catch (error) {
+            console.log(error);
+            localStorage.removeItem('auth-token');
+            window.location.href = '/user/login';
+        }  
+}
+
+main()
+
 </script>
 </html>
