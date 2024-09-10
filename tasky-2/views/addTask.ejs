@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Add Task</h2>
+
+        <% if(success) { %>
+            <div class="success-msg"><%= success %></div>
+        <% } else if(error) { %>
+            <div class="error-msg"><%= error %></div>
+        <% } %>
+
+        <form action="/task/add" method="POST">
+           
+                <label for="taskName">Task Name:</label>
+                <% if(validationErr && validationErr.task) { %>
+                    <p class="validationErr"><%= validationErr.task %></p>
+                <% } %>
+                <input type="text" id="taskName" name="task" required>
+         
+                <label for="deadline">Deadline:</label>
+                <% if(validationErr && validationErr.deadline) { %>
+                    <p class="validationErr"><%= validationErr.deadline %></p>
+                <% } %>
+                <input type="date" id="deadline" name="deadline" required>
+           
+            <button type="submit">Add Task</button>
+        </form>
+
+    </div>
+</body>
+<script>
+     const token = localStorage.getItem("auth-token")
+    if(!token){
+        window.location.href = "/user/login"
+    }
+    // Sending headers with axios post request 
+    axios.post("/user/auth", {} , {
+            headers: {
+                        'x-auth-key': token, // Custom header 
+                        'Content-Type': 'application/json'    // Specifies the content type of the request body
+                    }
+         },)
+         .catch((err) => {
+            console.log(err);
+            localStorage.removeItem("auth-token")
+            window.location.href = "/user/login"
+            
+         })
+</script>
+</html>

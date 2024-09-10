@@ -1,6 +1,10 @@
+import { validationResult } from 'express-validator';
+
 import TaskModel from "../models/Task.js";
 import {getReminders} from "../utils/reminders.js"
 import { cancelJobs, scheduleNotifications } from "../utils/scheduleNotifications.js";
+
+let obj = {error :null, title : null, success : null, validationErr : null}
 
 async function getTaskController(req, res) {
   try {
@@ -38,15 +42,26 @@ async function getAllTasksController(req, res){
 
 async function addTaskController(req, res){
     try {
+      const reqErrors = validationResult(req);
+
+      if (!reqErrors.isEmpty()) {
+          const errors = reqErrors.errors.reduce((acc, err) => {
+              acc[err.path] = err.msg;
+              return acc;
+          }, {});
+      
+          return res.render("addTask", {...obj, validationErr : errors}) 
+        }
+
         let {body} = req;
-        let {id, phone} = req.user
+        let {id, phone, email} = req.user
         body.reminders = getReminders(body.deadline);
         body.deadline = new Date(body.deadline)
         body.user = id
 
         let task = new TaskModel(body)
         await task.save()
-        scheduleNotifications({reminders : body.reminders, toPhoneNum: phone, task : body.task, deadline : body.deadline, taskid : task._id });
+        scheduleNotifications({reminders : body.reminders, toPhoneNum: phone, task : body.task, deadline : body.deadline, taskid : task._id, email });
         res.send("Task Added Successfully !")
 
       } catch (err) {

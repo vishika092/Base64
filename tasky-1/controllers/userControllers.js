@@ -27,6 +27,12 @@ async function userRegisterController(req, res) {
     body.password = hashedPassword;
     const user = new UserModel(body);
     await user.save();
+
+    // send email to verify user email
+    //  verification link format  : /user/verify/email=EMAIL&token=RANDOMSTRING  (12 to 15 character random string)   --> store random string in db for 10 min  (email as key and random string as value)   
+    // another get api   --> db logic  --> render success or failure
+    // if u click link    --> isVerfied becomes true in db 
+    // then redirect to login
     return res.send("User Registered Successfully !");
 
   } catch (err) {
