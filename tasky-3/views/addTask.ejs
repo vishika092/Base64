@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Add Task</h2>
+
+        <% if(success) { %>
+            <div class="success-msg"><%= success %></div>
+        <% } else if(error) { %>
+            <div class="error-msg"><%= error %></div>
+        <% } %>
+
+        <form action="/task/add" method="POST">
+           
+                <label for="taskName">Task Name:</label>
+                <% if(validationErr && validationErr.task) { %>
+                    <p class="validationErr"><%= validationErr.task %></p>
+                <% } %>
+                <input type="text" id="taskName" name="task" >
+         
+                <label for="deadline">Deadline:</label>
+                <% if(validationErr && validationErr.deadline) { %>
+                    <p class="validationErr"><%= validationErr.deadline %></p>
+                <% } %>
+                <input type="datetime-local" id="deadline" name="deadline" >    
+
+            <input class="btn" type="submit" value="Add Task">     
+            <!--  type="button" is important ! -->
+            <a href="/user/logout"><button type="button" class="btn"> Logout </button></a>
+        
+        </form>
+
+    </div>
+</body>
+</html>

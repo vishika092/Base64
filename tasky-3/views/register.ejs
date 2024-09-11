@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+
+        <% if(success) { %>
+            <div class="success-msg"><%= success %></div>
+        <% } else if(error) { %>
+            <div class="error-msg"><%= error %></div>
+        <% } %>
+
+        <form id="registrationForm" action="/user/register" method="POST">
+            <label for="name">First Name:</label>
+            <% if(validationErr && validationErr.name) { %>
+                <p class="validationErr"><%= validationErr.name %></p>
+            <% } %>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <% if(validationErr && validationErr.email) { %>
+                <p class="validationErr"><%= validationErr.email %></p>
+            <% } %>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <% if(validationErr && validationErr.password) { %>
+                <p class="validationErr"><%= validationErr.password %></p>
+            <% } %>
+            <input type="password" id="password" name="password" required>
+
+            <label for="phone">Phone:</label>
+            <% if(validationErr && validationErr.phone) { %>
+                <p class="validationErr"><%= validationErr.phone %></p>
+            <% } %>
+            <input type="tel" id="phone" name="phone" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
