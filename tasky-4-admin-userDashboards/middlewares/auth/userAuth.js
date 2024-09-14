@@ -8,7 +8,8 @@ function authMiddleware(req, res, next) {
         }
         const payload = jwt.verify(token, process.env.JWT_SECRET); // throws Error for invalid token
         req.user = payload;
-        next();
+       next()
+       
     } catch (error) {
         //  This command tells the server to remove the cookie named access_token from the client.
         return res.clearCookie("access_token", {
@@ -18,4 +19,24 @@ function authMiddleware(req, res, next) {
     }
 }
 
-export default authMiddleware;
+function isAdmin(req, res, next){
+    if(req.user.role !== "admin"){
+        res.clearCookie("access_token", {
+            sameSite: "strict"
+        });
+        return res.status(403).render("401.ejs");
+    }
+    next()
+}
+
+function isUser(req, res, next){
+    if(req.user.role !== "user"){
+        res.clearCookie("access_token", {
+            sameSite: "strict"
+        });
+        return res.status(403).render("401.ejs");
+    }
+    next()
+}
+
+export  {authMiddleware, isAdmin, isUser};

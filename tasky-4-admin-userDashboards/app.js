@@ -8,6 +8,7 @@ import "./utils/dbConnect.js"
 // Import Routers
 import userRouter from "./routers/userRouter.js";
 import taskRouter from "./routers/taskRouter.js";
+import adminRouter from "./routers/adminRouter.js";
 
 
 let app = express();
@@ -28,7 +29,7 @@ app.use(cookieParser())  //  if any client is coming with cookies  it reads that
 app.use(express.static("public"))    // serve public folder under /
 app.use("/user", userRouter)
 app.use("/task", taskRouter)
-
+app.use("/admin", adminRouter);
 
 
 app.all("*", (req, res) => {

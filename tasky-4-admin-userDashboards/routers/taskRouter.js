@@ -10,9 +10,9 @@ let taskRouter = express.Router();
 
 import { getTaskController, addTaskController, getAllTasksController, deleteTaskController, editTaskController } from "../controllers/taskControllers.js";
 import {validationErrorHandler, addTaskValidator, taskIdValidator, editTaskValidator} from "../middlewares/validations/validators.js"
-import authMiddleware from "../middlewares/auth/userAuth.js"
+import {authMiddleware, isUser} from "../middlewares/auth/userAuth.js"
 
-taskRouter.use(authMiddleware);
+taskRouter.use(authMiddleware, isUser);
 
 //the route /api/tasks/all should be defined before the route /api/tasks/:taskid. This way, Mongoose doesn't try to cast "all" as an ObjectId.
 

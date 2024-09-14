@@ -9,7 +9,7 @@ let obj = {title : null, error : null, success : null, validationErr : null}
 import { userLoginController, userRegisterController } from "../controllers/userControllers.js"
 import { signUpValidator, logInValidator } from "../middlewares/validations/validators.js"
 import isLoggedIn from "../middlewares/auth/isLoggedIn.js";
-import authMiddleware from "../middlewares/auth/userAuth.js";
+import { isUser , authMiddleware} from "../middlewares/auth/userAuth.js";
 
 
 userRouter.get("/register", (req, res, next) => {
@@ -29,12 +29,8 @@ userRouter.get("/logout", (req, res, next) => {
     }).status(302).redirect("/user/login")
 })
 
-userRouter.get("/userDashboard", authMiddleware, (req, res) => {
+userRouter.get("/userDashboard", authMiddleware,isUser, (req, res) => {
      return res.render("userDashboard.ejs", obj)
-})
-
-userRouter.get("/adminDashboard", authMiddleware, (req, res) => {
-    return res.render("adminDashboard.ejs", obj)
 })
 
 

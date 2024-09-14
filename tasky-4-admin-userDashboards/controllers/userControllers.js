@@ -90,7 +90,8 @@ async function userLoginController(req, res) {
     let payload = {
         id: user._id,
         email: user.email,
-        phone: user.phone
+        phone: user.phone,
+        role : user.role
     }
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
     
@@ -104,7 +105,7 @@ async function userLoginController(req, res) {
         res.redirect("/user/userDashboard")
       }
       else if(user.role === "admin"){
-        res.redirect("/user/adminDashboard")
+        res.redirect("/admin")
       }
     }
    
