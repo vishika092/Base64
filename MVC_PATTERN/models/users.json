@@ -1,0 +1,16 @@
+[
+    {
+        "id": "l29i79m",
+        "name": "Prash",
+        "email": "prash@gmail.com",
+        "password": "prash-password",
+        "todos": []
+    },
+    {
+        "id": "nc1991i",
+        "name": "John",
+        "email": "john@gmail.com",
+        "password": "john-password",
+        "todos": []
+    }
+]
