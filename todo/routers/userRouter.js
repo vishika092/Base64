@@ -26,6 +26,7 @@ userRouter.post("/login", loginValidation, validationErrorResult, async (req, re
 
       const randomString = (Math.random().toString().slice(2, 8));
 
+    
       await redisClient.set(`otp_${email}`, randomString,  { EX: 10 * 60 })
 
       sendMail({toAddress : email, subject : `OTP - ${randomString}`, body : `<div>${randomString}</div>`})
@@ -83,6 +84,7 @@ userRouter.post("/login", loginValidation, validationErrorResult, async (req, re
         'vishika',
         { expiresIn: '1h' }
       );
+
       await redisClient.del("otp")
       console.log("token deleted");
       

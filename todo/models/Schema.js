@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 
 const TaskSchema = new mongoose.Schema({
-  task: {
-    type: String,
+  tasks: {
+    type: [String],
     required: true, 
   },
   isCompleted : {

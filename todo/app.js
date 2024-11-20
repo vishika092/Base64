@@ -5,14 +5,13 @@ import "./utils/dbConnect.js";
 import todoRouter from './routers/todoRouter.js';
 import authMiddleware from './middlewares/auth/userAuth.js';
 import userRouter from './routers/userRouter.js';
-
 const app = express();
 const PORT = 3000;
 
 
 
-// app.use(express.static(path.join(__dirname, 'public', 'dist')));
-app.use(express.static('public/dist'));
+app.use(express.static(path.join(__dirname, 'public', 'dist')));
+// app.use(express.static('public/dist'));
 
 app.use(express.json());
 
@@ -34,8 +33,8 @@ app.get("/api/auth", authMiddleware, async (req, res) => {
 
 
 app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
-  res.sendFile(path.join('public/dist/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
+  // res.sendFile(path.join('public/dist/index.html'));
 });
 
 app.listen(PORT, () => {

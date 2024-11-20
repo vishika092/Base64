@@ -11,6 +11,7 @@ export const loginValidation = [
 ];
 
 export const taskValidation =  [
+  body("tasks").isArray().notEmpty().withMessage("Tasks required"),
   body("tasks.*")
     .isString()
     .notEmpty()
@@ -29,7 +30,6 @@ export function validationErrorResult(req, res, next) {
                acc[err.path] = err.msg;
                return acc;
       }, {});
-      console.log(errors);
       
     return res.status(200).json({ validationErr : errors});
   }
