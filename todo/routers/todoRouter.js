@@ -42,7 +42,9 @@ todoRouter.get("/current-todo", async (req, res) => {
 
 todoRouter.post("/change-todo", async (req, res) => {
     try{
-        let {tasks} = req.body;
+        let {tasks} = req.body;        
+        console.log(tasks);
+        
         await redisClient.set(`${req.user.id}`, JSON.stringify(tasks))
     
     return res.send({success : true});
