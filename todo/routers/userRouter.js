@@ -5,6 +5,7 @@ import "../utils/dbConnect.js";
 import { loginValidation, registerValidation, validationErrorResult } from '../middlewares/validation/validations.js';
 import sendMail from '../utils/sendMail.js';
 import redisClient from '../utils/redisClient.js';
+import sendSMS from '../utils/sendSMS.js';
 
 
 let userRouter = express.Router();
@@ -25,6 +26,8 @@ userRouter.post("/login", loginValidation, validationErrorResult, async (req, re
 
       const randomString = (Math.random().toString().slice(2, 8));
 
+      // console.log(randomString);
+      
       await redisClient.set(`otp_${email}`, randomString,  { EX: 10 * 60 })
 
       sendMail({toAddress : email, subject : `OTP - ${randomString}`, body : `<div>${randomString}</div>`})
