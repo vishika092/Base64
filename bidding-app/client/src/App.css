@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70vh; /* Adjust height for a balanced look */
+  height: 80vh; /* Adjust height for a balanced look */
   width: 40vw; /* Width to keep it compact and centered */
   max-width: 500px;
   border-radius: 15px; /* Rounded corners */
@@ -66,43 +66,60 @@
 /* Message input */
 .message-input {
   display: flex;
+  flex-direction: column; 
+  gap: 5px; 
   padding: 15px;
-  background-color: #f1f1f1; /* Subtle gray input background */
-  border-top: 1px solid #e0e0e0; /* Slight separation */
-  gap: 10px;
+  background-color: #f1f1f1; /* Subtle gray background */
+  border-top: 1px solid #e0e0e0; /* Separator from chat window */
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.05); /* Subtle inset shadow */
 }
 
 .message-input input {
-  flex: 1;
-  padding: 10px 15px;
-  font-size: 1rem;
+  padding: 12px 15px;
+  font-size: 0.9rem;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 8px; 
   outline: none;
-  background-color: #ffffff; /* White input background */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle input shadow */
+  background-color: #ffffff; 
+  width: 95%; 
+}
+
+.message-input input:focus {
+  border: 1px solid #0078d4; /* Highlight border on focus */
 }
 
 .message-input button {
-  padding: 10px 20px;
-  font-size: 0.9rem;
+  /* align-self: center; Center the button */
+  padding: 12px 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
   color: white;
   background-color: #0078d4;
   border: none;
-  border-radius: 20px;
+  border-radius: 8px;
+  width: 100%; 
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Button shadow */
 }
 
-.message-input input:disabled {
-  background-color: #e0e0e0; /* Gray background for disabled input */
-  cursor: not-allowed;
+
+
+.message-input button:hover {
+  background-color: #005bb5; /* Slightly darker blue on hover */
+  transform: scale(1.05); /* Subtle scaling on hover */
 }
 
+.message-input input:disabled,
 .message-input button:disabled {
-  background-color: #aaa; 
+  background-color: #e0e0e0; /* Neutral gray for disabled */
+  color: #888; /* Dimmed text color */
   cursor: not-allowed;
 }
+
+.message-input input::placeholder {
+  color: #aaa; /* Lighter gray for placeholder text */
+  font-style: italic; /* Slightly styled placeholder */
+}
+
 
 
 .disconnected-message {

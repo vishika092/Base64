@@ -41,8 +41,14 @@ function App() {
         return;
       }
       setCurrBid(data.bid);
-      setMessages((prevMessages) => [...prevMessages, { message: `${data.fname} added a bid: ${data.bid}` }]);
-   messages.length!=0 && showAlert({type : 'success',  message : `${data.fname} added a Bid`})
+      setMessages((prevMessages) => {
+        const updatedMessages = [...prevMessages, { message: `${data.fname} added a bid: ${data.bid}` }];
+        
+        if (prevMessages.length !== 0) {
+          showAlert({ type: 'success', message: `${data.fname} added a Bid` });
+        }
+        return updatedMessages;
+      });
      
     });
   
