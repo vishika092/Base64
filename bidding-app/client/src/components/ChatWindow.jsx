@@ -2,8 +2,6 @@ import React from 'react';
 import Message from './Message';
 
 const ChatWindow = ({ messages }) => {
-  console.log(messages);
-
   return (
     
     <div className="chat-window">

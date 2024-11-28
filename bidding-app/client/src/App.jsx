@@ -6,7 +6,7 @@ import { io } from 'socket.io-client';
 import Alert from './components/Alert';
 import Bidding from './components/Bidding';
 
-const socket = io('http://localhost:8080/');
+const socket = io('http://65.108.212.237:8080/');
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -40,10 +40,12 @@ function App() {
         showAlert({ type: 'error', message: `Low bidding by ${data.fname}` });
         return;
       }
-      setCurrBid(data.bid);
+
+      setCurrBid(data.bid)
+  
       setMessages((prevMessages) => {
         const updatedMessages = [...prevMessages, { message: `${data.fname} added a bid: ${data.bid}` }];
-        
+
         if (prevMessages.length !== 0) {
           showAlert({ type: 'success', message: `${data.fname} added a Bid` });
         }

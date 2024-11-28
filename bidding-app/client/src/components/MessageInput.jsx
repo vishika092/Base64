@@ -5,7 +5,9 @@ const MessageInput = ({ socket, disconnect }) => {
   const [bid, setBid] = useState('');  
 
   const handleSend = () => {
-    if (name.trim() && bid.trim()) {
+    console.log((+bid));
+    
+    if (name.trim() && bid.trim() && !isNaN(+bid)) {
       socket.emit("bid", { fname: name, bid: +bid });
       setBid('');
     }
